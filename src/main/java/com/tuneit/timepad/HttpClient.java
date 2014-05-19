@@ -17,7 +17,7 @@ public class HttpClient {
             URL url = new URL(str);
             connection = url.openConnection();
             input = new BufferedReader(new InputStreamReader(
-                                    connection.getInputStream()));
+                    connection.getInputStream()));
             outputValue = input.readLine();
         } catch (IOException e) {
             e.printStackTrace();

@@ -10,7 +10,6 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 import javax.portlet.*;
 import java.io.*;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
@@ -21,7 +20,7 @@ public class TimePad extends MVCPortlet {
     public static ArrayList<Registration> registrationList = new ArrayList<Registration>();
     public static Event event = new Event();
     public static boolean newEvent = false;
-    
+
     @Override
     public void doView(RenderRequest renderRequest,
             RenderResponse renderResponse) throws IOException, PortletException {
@@ -35,7 +34,7 @@ public class TimePad extends MVCPortlet {
         renderRequest.setAttribute("endDate", event.getEndDate());
         renderRequest.setAttribute("categoryList", categoryList);
         renderRequest.setAttribute("registrationList", registrationList);
-        
+
         if (event.isPublicity()) {
             renderRequest.setAttribute("publicity", "true");
         } else {
@@ -48,12 +47,12 @@ public class TimePad extends MVCPortlet {
     public void saveGeneral(ActionRequest actionRequest,
             ActionResponse actionResponse) throws IOException, PortletException,
             PortalException, SystemException {
-         actionRequest.setCharacterEncoding("UTF-8");
+        actionRequest.setCharacterEncoding("UTF-8");
         log.info("saveGeneral");
         String api = actionRequest.getParameter("apiKey");
         String id = actionRequest.getParameter("companyId");
         String evt = actionRequest.getParameter("newEvent");
-        
+
         if (api == null) {
             api = event.getApiCode();
         }
@@ -61,20 +60,20 @@ public class TimePad extends MVCPortlet {
         if (id == null) {
             id = event.getId();
         }
-        
+
         try {
-        if (evt.equals("true"))
-            newEvent = true;
-        else
+            if (evt.equals("true")) {
+                newEvent = true;
+            } else {
+                newEvent = false;
+            }
+        } catch (NullPointerException e) {
             newEvent = false;
         }
-        catch ( NullPointerException e){
-            newEvent = false;
-        }
-        
+
         event.setApiCode(api);
         event.setId(id);
-        
+
         log.info("newEvent= " + evt);
         log.info("api = " + api.toString());
         log.info("id = " + id.toString());
@@ -137,7 +136,7 @@ public class TimePad extends MVCPortlet {
         log.info("\n\n");
         log.info("saveCategory");
 
-       //Category newCategory = (Category) actionRequest.getAttribute("newCategory");
+        //Category newCategory = (Category) actionRequest.getAttribute("newCategory");
         String nameCategory = (String) actionRequest.getParameter("nameCategory");
         String priceCategory = (String) actionRequest.getParameter("priceCategory");
         String countCategory = (String) actionRequest.getParameter("countCategory");
@@ -163,12 +162,11 @@ public class TimePad extends MVCPortlet {
 
         int i = Integer.parseInt(actionRequest.getParameter("row"));
         System.out.println("row= " + i);
-            try {
+        try {
             categoryList.remove(i);
-            }
-            catch ( IndexOutOfBoundsException e) {
-                log.info("out");
-            }
+        } catch (IndexOutOfBoundsException e) {
+            log.info("out");
+        }
 
         for (Category cat : categoryList) {
             System.out.println(cat.toString());
@@ -189,24 +187,25 @@ public class TimePad extends MVCPortlet {
         String numberAnswers = (String) actionRequest.getParameter("numberAnswers");
         String[] qVariant = null;
         String variant;
-        if ( !numberAnswers.equals("null") ) {
+        if (!numberAnswers.equals("null")) {
             int number = Integer.parseInt(numberAnswers);
             qVariant = new String[number + 1];
-            for ( int i = 1; i <= number; i++  ) {
+            for (int i = 1; i <= number; i++) {
                 variant = (String) actionRequest.getParameter("variant" + String.valueOf(i));
                 log.info(variant.toString());
                 qVariant[i] = variant;
-            }  
+            }
         }
-        if ( qMandatory.equals("true"))
+        if (qMandatory.equals("true")) {
             qMandatory = "1";
-        else
+        } else {
             qMandatory = "0";
+        }
         Registration registration = new Registration(qName, qType, qMandatory, qVariant);
         registrationList.add(registration);
         log.info("saveQuestion");
         log.info(registration.toString());
-       
+
         log.info("\n\n");
 
     }
@@ -215,26 +214,24 @@ public class TimePad extends MVCPortlet {
     public void removeQuestion(ActionRequest actionRequest,
             ActionResponse actionResponse) throws IOException, PortletException,
             PortalException, SystemException {
-        
-         log.info("\n\n");
+
+        log.info("\n\n");
         log.info("removeQuestion");
 
         int i = Integer.parseInt(actionRequest.getParameter("row"));
         System.out.println("row= " + i);
-            try {
+        try {
             registrationList.remove(i);
-            }
-            catch ( IndexOutOfBoundsException e) {
-                log.info("out");
-            }
+        } catch (IndexOutOfBoundsException e) {
+            log.info("out");
+        }
 
         for (Registration cat : registrationList) {
             System.out.println(cat.toString());
         }
-        
+
         log.info("\n\n");
         log.info("removeQuestion");
-
 
     }
 
@@ -251,15 +248,13 @@ public class TimePad extends MVCPortlet {
         String eventNumber;
         String domain;
         String str[];
-      log.info("new = " + newEvent);
-      log.info("eventID = " + event.getEventID());
-      
-        if ( newEvent || event.getEventID().equals("")  )
-        {
+        log.info("new = " + newEvent);
+        log.info("eventID = " + event.getEventID());
+
+        if (newEvent || event.getEventID().equals("")) {
             url = event.createEventURL(event);
             log.info("create");
-        }
-        else {
+        } else {
             log.info("edit");
             url = event.updateEventURL(event);
         }
@@ -268,21 +263,21 @@ public class TimePad extends MVCPortlet {
         url = url.concat(category);
         url = url.concat(registration);
         output = client.connectToTimePad(url);
-       
+
         log.info(output);
-        if ( output.contains("{\"id\":") ) {
-            
-        str = output.split("\"");
-        eventNumber = str[3];
-        log.info("eventID = " + eventNumber);
-         
-        str = str[7].split("/");
-        str = str[2].split("\\.");
-        domain = str[0];
-        log.info("domain = " + domain);
-        event.setEventID(eventNumber);
-        event.setDomain(domain);
-         }
+        if (output.contains("{\"id\":")) {
+
+            str = output.split("\"");
+            eventNumber = str[3];
+            log.info("eventID = " + eventNumber);
+
+            str = str[7].split("/");
+            str = str[2].split("\\.");
+            domain = str[0];
+            log.info("domain = " + domain);
+            event.setEventID(eventNumber);
+            event.setDomain(domain);
+        }
         log.info(url);
         log.info("publicEvent");
         log.info(output);

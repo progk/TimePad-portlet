@@ -61,26 +61,20 @@ div#users-contain table td, div#users-contain table th {
 
 .event h2
 {
-    clear:left;
-    padding-left:10%;
     font-size:200%;
     font-weight:400;
     margin:0 0 3px;
 }
 
+.gen_info
+{
+    text-align: center;
+    
+}
+
 .event p
 {
     font-size:95%;
-    padding-left:15%;
     line-height:130%;
     margin:0 0 12px;
-}
-.description
-{
-    font-size:150%;
-}
-.shortDescription
-{
-    font-size:90%;
-    padding-left:10%;
 }

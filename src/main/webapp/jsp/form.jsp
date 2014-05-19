@@ -19,21 +19,20 @@
 
 
 <div id="mainForm">
-    <div class="event">
+    <div class="event" class="gen_info" style="text-align: center;">
         <h2><%=nameOfEvent%></h2>
         <p><i><%=startDate%> - <%=endDate%></i></p>
     </div>
     <br>
-    <div class="shortDescription">
-
+    <div class="shortDescription" style="font-size: 130%">
         <p><%=shortDesc%></p>
     </div>
     <br>
     <br>
-    <div class="description">
+    <div class="description" style="font-size: 110%">
         <p> <%=longDesc%> </p>
     </div>
-    
+
     <hr size="7" color="black" align="left">
 
 </div>
@@ -43,8 +42,8 @@
     var eventID = document.getElementById("eventID").value;
     var domain = document.getElementById("domain").value;
     var org = document.getElementById("org").value;
-    
-    if ( eventID != "" )
+
+    if (eventID != "")
         document.getElementById("mainForm").style.display = "block";
     else
         document.getElementById("mainForm").style.display = "none";

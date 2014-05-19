@@ -1,4 +1,3 @@
-
 package com.tuneit.timepad;
 
 import java.io.UnsupportedEncodingException;
@@ -7,7 +6,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Event {
-    
+
     private final String CREATE_URL = "http://timepad.ru/api/event_create/?";
     private final String EDIT_URL = "http://timepad.ru/api/event_edit/?";
     private String eventID;
@@ -20,8 +19,7 @@ public class Event {
     private String shortDesc;
     private String description;
     private boolean publicity;
-    
-    
+
     Event() {
         this.id = "";
         this.apiCode = "";
@@ -33,7 +31,7 @@ public class Event {
         this.eventID = "";
         this.domain = "";
         this.publicity = false;
-        
+
     }
 
     public String getId() {
@@ -107,7 +105,7 @@ public class Event {
     public void setEventID(String eventID) {
         this.eventID = eventID;
     }
-    
+
     public String getDomain() {
         return domain;
     }
@@ -115,43 +113,43 @@ public class Event {
     public void setDomain(String domain) {
         this.domain = domain;
     }
-    
-    public String createEventURL(Event event)
-    {
+
+    public String createEventURL(Event event) {
         String url = "";
         try {
-            url = url.concat(CREATE_URL + "code=" + URLEncoder.encode(this.apiCode, "utf-8") + "&id=" + URLEncoder.encode(this.id, "utf-8") +
-                    "&name=" + URLEncoder.encode(this.name, "utf-8") + "&start_date=" + URLEncoder.encode(this.startDate, "utf-8") +
-                    "&end_date=" + URLEncoder.encode(this.endDate, "utf-8") + "&shortdescription=" + URLEncoder.encode(this.shortDesc, "utf-8") +
-                    "&description=" + URLEncoder.encode(this.description, "utf-8"));
+            url = url.concat(CREATE_URL + "code=" + URLEncoder.encode(this.apiCode, "utf-8") + "&id=" + URLEncoder.encode(this.id, "utf-8")
+                    + "&name=" + URLEncoder.encode(this.name, "utf-8") + "&start_date=" + URLEncoder.encode(this.startDate, "utf-8")
+                    + "&end_date=" + URLEncoder.encode(this.endDate, "utf-8") + "&shortdescription=" + URLEncoder.encode(this.shortDesc, "utf-8")
+                    + "&description=" + URLEncoder.encode(this.description, "utf-8"));
         } catch (UnsupportedEncodingException ex) {
             Logger.getLogger(Event.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        if (event.isPublicity())
+
+        if (event.isPublicity()) {
             url += "&public=1";
-        else 
+        } else {
             url += "&public=0";
+        }
         System.out.println(url);
         return url;
     }
-    
-     public String updateEventURL(Event event)
-    {
+
+    public String updateEventURL(Event event) {
         String url = "";
         try {
-            url = url.concat(EDIT_URL + "code=" + URLEncoder.encode(this.apiCode, "utf-8") + "&id=" + URLEncoder.encode(this.id, "utf-8") +
-                    "&e_id=" + URLEncoder.encode(this.eventID, "utf-8") + "&name=" + URLEncoder.encode(this.name, "utf-8") + "&start_date=" + URLEncoder.encode(this.startDate, "utf-8") +
-                    "&end_date=" + URLEncoder.encode(this.endDate, "utf-8") + "&shortdescription=" + URLEncoder.encode(this.shortDesc, "utf-8") +
-                    "&description=" + URLEncoder.encode(this.description, "utf-8"));
+            url = url.concat(EDIT_URL + "code=" + URLEncoder.encode(this.apiCode, "utf-8") + "&id=" + URLEncoder.encode(this.id, "utf-8")
+                    + "&e_id=" + URLEncoder.encode(this.eventID, "utf-8") + "&name=" + URLEncoder.encode(this.name, "utf-8") + "&start_date=" + URLEncoder.encode(this.startDate, "utf-8")
+                    + "&end_date=" + URLEncoder.encode(this.endDate, "utf-8") + "&shortdescription=" + URLEncoder.encode(this.shortDesc, "utf-8")
+                    + "&description=" + URLEncoder.encode(this.description, "utf-8"));
         } catch (UnsupportedEncodingException ex) {
             Logger.getLogger(Event.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        if (event.isPublicity())
+
+        if (event.isPublicity()) {
             url += "&public=1";
-        else 
+        } else {
             url += "&public=0";
+        }
         System.out.println(url);
         return url;
     }
@@ -160,9 +158,5 @@ public class Event {
     public String toString() {
         return "Event{" + "MAIN_URL=" + CREATE_URL + ", apiCode=" + apiCode + ", name=" + name + ", startDate=" + startDate + ", endDate=" + endDate + ", shortDesc=" + shortDesc + ", description=" + description + ", publicity=" + publicity + ", id=" + id + '}';
     }
-    
-    public void abc(){
-        System.out.println("abc");
-    }
-    
+
 }

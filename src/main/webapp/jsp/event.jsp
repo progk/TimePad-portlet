@@ -14,23 +14,9 @@
     String endDate = request.getAttribute("endDate").toString();
     String shortDesc = request.getAttribute("shortDesc").toString();
     String description = request.getAttribute("description").toString();
-    
+
     boolean publicity = false;
-    /*if (!request.getAttribute("nameEvent").toString().isEmpty()) {
-        nameEvent = (String) request.getAttribute("nameEvent");
-    }
-    if (!request.getAttribute("startDate").toString().isEmpty()) {
-        startDate = (String) request.getAttribute("startDate");
-    }
-    if (!request.getAttribute("endDate").toString().isEmpty()) {
-        endDate = (String) request.getAttribute("endDate");
-    }
-    if (!request.getAttribute("shortDesc").toString().isEmpty()) {
-        shortDesc = (String) request.getAttribute("shortDesc");
-    }
-    if (!request.getAttribute("description").toString().isEmpty()) {
-        description = (String) request.getAttribute("description");
-    }*/
+
     if (request.getAttribute("publicity") == "true") {
         publicity = true;
     } else {
@@ -41,29 +27,29 @@
 
 
 <script type="text/javascript">
-    
-     $(function() {
-            $( "#datepickerStart" ).datepicker({
-                   dateFormat: 'dd-mm-yy',
-                   firstDay: 1,
-                   onSelect: function(){ 
-                                        var dateObject = $(this).val(); 
-                                        saveEvent("startDate",dateObject);
-                                       }
-                    });
+
+    $(function() {
+        $("#datepickerStart").datepicker({
+            dateFormat: 'dd-mm-yy',
+            firstDay: 1,
+            onSelect: function() {
+                var dateObject = $(this).val();
+                saveEvent("startDate", dateObject);
+            }
         });
-        
-        
-      $(function() {
-            $( "#datepickerEnd" ).datepicker({
-                   dateFormat: 'dd-mm-yy',
-                   firstDay: 1,
-                   onSelect: function(){ 
-                                        var dateObject = $(this).val(); 
-                                        saveEvent("endDate",dateObject);
-                                       }
-                    });
+    });
+
+
+    $(function() {
+        $("#datepickerEnd").datepicker({
+            dateFormat: 'dd-mm-yy',
+            firstDay: 1,
+            onSelect: function() {
+                var dateObject = $(this).val();
+                saveEvent("endDate", dateObject);
+            }
         });
+    });
 
     function saveEvent(str, data) {
         jQuery.ajax({
@@ -73,14 +59,14 @@
             success: function() {
                 //alert(data.toString());
             }
-            
+
         });
     }
 
 </script>
 
 <div>
-   
+
     <p>Name of Event:<br>
         <input name="nameEvent" label="Name of Event" type="text" value="<%=nameEvent%>" onChange="saveEvent('nameEvent', this.value);"/>
     </p>
@@ -95,7 +81,7 @@
     <br>
     <aui:input type="textarea" label="Short Description" name="shortDesc" value="<%=shortDesc%>" onChange="saveEvent('shortDesc',this.value);"/>
     <p>
-    <aui:input type="textarea" label="Description" name="description" value="<%=description%>" onChange="saveEvent('description', this.value);"/>
+        <aui:input type="textarea" label="Description" name="description" value="<%=description%>" onChange="saveEvent('description', this.value);"/>
     </p>
     <aui:input type="checkbox" label="Publicity" name="publicity" checked="<%=publicity%>" onChange="saveEvent('publicity', this.checked);"/>
 </div>

@@ -2,11 +2,11 @@
 <!DOCTYPE display PUBLIC "-//Liferay//DTD Display 6.2.0//EN" "http://www.liferay.com/dtd/liferay-display_6_2_0.dtd">
 
 <display>
-	<category name="category.hidden">
-		<portlet id="TimePad-portlet" />
-	</category>
+    <category name="category.hidden">
+        <portlet id="TimePad-portlet" />
+    </category>
         
-        <category name="category.sample">
-		<portlet id="TimePad" />
-	</category>
+    <category name="TimePad" >
+        <portlet id="TimePadFront" />
+    </category>
 </display>

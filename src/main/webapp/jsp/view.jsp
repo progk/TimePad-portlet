@@ -51,13 +51,9 @@ refresh="<%= false%>"
     <liferay-ui:section>
         <%@include file="/jsp/category.jsp" %>
     </liferay-ui:section>
-    
+
     <liferay-ui:section>
         <%@include file="/jsp/registration.jsp" %>
     </liferay-ui:section>
-
-    <!--liferay-ui:section-->
-        <!--%@include file="/jsp/participants.jsp" %-->
-    <!--/liferay-ui:section-->
 
 </liferay-ui:tabs>

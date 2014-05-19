@@ -67,14 +67,14 @@ public class Registration {
                 str = str.concat("&q" + Integer.valueOf(i + 1) + "name=" + URLEncoder.encode(list.get(i).getqName(), "utf-8")
                         + "&q" + Integer.valueOf(i + 1) + "type=" + URLEncoder.encode(list.get(i).getqType(), "utf-8")
                         + "&q" + Integer.valueOf(i + 1) + "mandatory=" + URLEncoder.encode(list.get(i).getqMandatory(), "utf-8"));
-           
-            if (((list.get(i).getqType().equals("radio") || list.get(i).getqType().equals("multivar"))) && list.get(i).getqVariant() != null) {
-                for (int j = 1; j <= list.get(i).getqVariant().length - 1; j++) {
-                    System.out.println(list.get(i).getqVariant().length);
-                    str = str.concat("&q" + Integer.valueOf(i + 1) + "variant" + Integer.valueOf(j) + "=" + URLEncoder.encode(list.get(i).getqVariant()[j], "utf-8"));
+
+                if (((list.get(i).getqType().equals("radio") || list.get(i).getqType().equals("multivar"))) && list.get(i).getqVariant() != null) {
+                    for (int j = 1; j <= list.get(i).getqVariant().length - 1; j++) {
+                        System.out.println(list.get(i).getqVariant().length);
+                        str = str.concat("&q" + Integer.valueOf(i + 1) + "variant" + Integer.valueOf(j) + "=" + URLEncoder.encode(list.get(i).getqVariant()[j], "utf-8"));
+                    }
                 }
-            }
-             } catch (UnsupportedEncodingException ex) {
+            } catch (UnsupportedEncodingException ex) {
                 Logger.getLogger(Registration.class.getName()).log(Level.SEVERE, null, ex);
             }
         }

@@ -10,34 +10,24 @@
 
 
 
-<%     
-     String name;
-     String type;
-     String mandatory;
-     
-     ArrayList<Registration> registrationList;
-     
-     registrationList = (ArrayList<Registration>) request.getAttribute("registrationList");
-     
-     if (registrationList == null) {
-     registrationList = new ArrayList<Registration>();
-     System.out.println("reg list is null");
-     }
+<%
+    String name;
+    String type;
+    String mandatory;
+
+    ArrayList<Registration> registrationList;
+
+    registrationList = (ArrayList<Registration>) request.getAttribute("registrationList");
+
+    if (registrationList == null) {
+        registrationList = new ArrayList<Registration>();
+        System.out.println("reg list is null");
+    }
 
 %>
 
 
 <script type="text/javascript">
-
-    function saveCategory(str, data) {
-        jQuery.ajax({
-            type: "POST",
-            data: str + "=" + data,
-            url: "<%= saveQuestionURL.toString()%>",
-            success: function() {
-            }
-        });
-    }
 
     function removeQuestion(th) {
         var row = $(th).closest("tr").index();
@@ -190,7 +180,7 @@
 
                             }
                         });
-                        
+
                         $("#registrationTable tbody").append("<tr>" +
                                 "<td>" + name.val() + "</td>" +
                                 "<td>" + document.getElementById("hiddenRadioVal").value + "</td>" +
@@ -227,15 +217,15 @@
                 var num = 0;
                 var col = 1;
                 $("#regTable tbody tr td input[type=text]").each(function() {
-                        num++;
-                        $(this).attr("id", "textAnswer" + num.toString());
-                        col++;
+                    num++;
+                    $(this).attr("id", "textAnswer" + num.toString());
+                    col++;
                 });
                 num = 0;
-                 $("#regTable tbody tr td label").each(function() {
-                        num++;
-                        var number = $("<label id=\"label" + num + "\">" + num + ".&nbsp&nbsp</label>");
-                        $(this).replaceWith(number);
+                $("#regTable tbody tr td label").each(function() {
+                    num++;
+                    var number = $("<label id=\"label" + num + "\">" + num + ".&nbsp&nbsp</label>");
+                    $(this).replaceWith(number);
                 });
             });
             trTable.append(num);
@@ -294,8 +284,8 @@
             </tr>
         </thead>  
         <tbody>
-             <%for (Registration reg : registrationList) {
-                    System.out.println(reg.toString());%>
+            <%for (Registration reg : registrationList) {
+                     System.out.println(reg.toString());%>
             <tr>
                 <td><%=reg.getqName()%></td>
                 <td><%=reg.getqType()%></td>

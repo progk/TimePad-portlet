@@ -30,16 +30,6 @@
 
 <script type="text/javascript">
 
-    function saveCategory(str, data) {
-        jQuery.ajax({
-            type: "POST",
-            data: str + "=" + data,
-            url: "<%= saveCategoryURL.toString()%>",
-            success: function() {
-            }
-        });
-    }
-
     $(function() {
         var name = $("#nameCategory");
         var price = $("#priceCategory");

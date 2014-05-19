@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.tuneit.timepad;
 
 import com.liferay.util.bridges.mvc.MVCPortlet;
@@ -12,6 +11,6 @@ import com.liferay.util.bridges.mvc.MVCPortlet;
  *
  * @author sergey
  */
-public class TimePadFront extends MVCPortlet{
-    
+public class TimePadFront extends MVCPortlet {
+
 }
